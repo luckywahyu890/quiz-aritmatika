@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      background:linear-gradient(to left,#ccc 1%, #222 80%);
+    #wrapper{
+      position: absolute;
+      background-color: black;
+      padding-bottom: 15px;
+      padding-top: 12px;
+      padding-right: 4px;
+      padding-left: 4px;
+      text-align: center;
+      font-family: Monospace;
+      text-shadow:3px 3px 12px white;
+      border: 2px solid black;
+      margin-top:200px;
+      border-radius:80% 80% 80% 80%
+    }
+    #wrapper2{
+      background-color: yellow;
+      width:320px;
+      margin-left:1px;
+      padding-bottom: 12px;
+      border-top:3px solid blue;
+      border-left:3px solid blue;
+      text-shadow: none;
+      border-radius:190% 90% 90% 90%
+    }
+    #mySoal{
+      background-color: #222;
+      width:280px;
+      margin-left:23px;
+      border-top: 1px solid blue;
+      border-right: 1px solid blue;
+      color:lime;
+      font-family:Monospace
+    }
+    #inpt{
+      border: 3px solid black;
+      width:150px;
+      height: 21px;
+      text-align: center;
+    }
+    button{
+      font-size: 23px;
+      background-color: lime;
+      border: 3px solid black;
+      border-radius:30%;
+    }
+    button:hover{
+      font-size: 23px;
+      background-color: green;
+      border: 3px solid black;
+      border-radius:30%;
+      color:white;
+    }
+    #nilai{
+      background-color:yellow;
+      color:black;
+      width:120px;
+      border-radius:100%;
+      margin: auto;
+      font-size:18px;
+      font-family:Monospace;
+      text-shadow:none;
+      border-right:4px solid blue;
+      border-top:4px solid blue;
+      
+    }
+    #waktu{
+      text-shadow:none;
+      width:220px;
+      margin: auto;
+      border-radius:15%;
+      font-size:18px;
+      font-family:Monospace;
+      color:lime
+    }
+    #disSoal{
+      Z-index:999;
+      width:275px;
+      position: fixed;
+      top:-12px;
+      text-align: center;
+      background-color: #222;
+      margin-top:16px;
+      color:white;
+      padding-right:59px;
+      padding-top:1px;
+      border:4px solid black;
+      border-radius:90% 0 90% 0;
+      border-top:2px solid white;
+      border-left:2px solid white;
+      box-shadow:2px -2px 1px black
+    }
+    #disSoal2{
+      margin-left:12px;
+      background-color: yellow;
+      color:black;
+    }
+    #prinSoal{
+      font-size: 17px;
+      border-top: 3px solid blue;
+      border-right: 3px solid blue;
+      box-shadow:3px -3px 1px red,5px -5px 1px blue;
+      
+    }
+    #dafSoal{
+      margin-left:12px;
+      background-color: green;
+      font-variant: small-caps;
+      border-top: 2px solid blue;
+      border-right: 2px solid blue;
+      
+    }
+    #slct{
+      font-size: 34px;
+      font-family: Monospace;
+      border:3px solid black;
+      background-color: #222;
+      color:white;
+    }
+    #tim{
+      font-size: 21px;
+      font-family: Monospace;
+      border:3px solid black;
+      background-color: #222;
+      color:white;
+    }
+    
+    #modee,#timee{
+      margin:45px 0px 0px 11px;
+      border:3px solid black;
+      position:fixed;
+      text-align: center;
+      top:200px;
+      background-color:bisque;
+    }
+    label{
+      font-family:Monospace;
+      font-variant: small-caps;
+      font-size:29px;
+    }
+    #inpt2{
+      text-align:center;
+      background-color:rgba(255,255,0,.9);
+      border:3px solid black
+    }
+   #endPlay{
+      position:absolute;
+      top:240px;
+      left:auto;
+      border:3px solid black;
+      font-size:58px;
+      background-color:red;
+      transform:rotate(-20deg);
+      color:white;}
+    #yourSkor{
+      font-size:16px;
+      font-family:Monospace;
+      background-color:#222;
+      color:white;
+      height:140px;
+      overflow:scroll ;
+      border:3px solid tomato;
+    }
+    #commandLine{
+      z-index: 999999999;
+      position: fixed;
+      text-align: center;
+      background-color: black;
+      width:125px;
+      top:250px;
+      left:120px;
+      border: 3px solid yellow;
+    }
+    #inpt3{
+      margin-top:12px;
+      width:100px;
+    }
+    #rahasia{
+      font-size: 11px;
+      background-color: yellow;
+      color:black;
+      border-top:2px solid black;
+      border-right:2px solid black;
+      margin-left:21px;
+      box-shadow:2px -2px 1px white
+    }
+  </style>
+</head>
+<body>
+  <div id="disSoal">
+    <h2 id="dafSoal">Daftar Soal terjawab</h2>
+    <h2 id="rahasia"></h2>
+    <div id="disSoal2">
+    <h2 id="prinSoal"></h2>
+    </div>
+  </div>
+  <div id="wrapper">
+    <h1 id="nilai">Nilai : 0</h1>
+    <h2>☆☆☆☆☆☆☆☆☆☆</h2>
+    <h1 id="waktu">Pending</h1>
+    <h2>■■■■■■■■■■■■■■■■■■■■</h2>
+    <div id="wrapper2">
+      <h1 id="mySoal">Soal Random</h1>
+      <h2>===========================</h2>
+      <div>
+        <input placeholder="Masukan jawaban"id="inpt">
+        <br><br>
+        <div>
+      <button id="easy" onclick="myBtnEasy()">KIRIM</button>
+      <button id="medium" onclick="myBtnMedium()">KIRIM</button>
+      <button id="hard" onclick="myBtnHard()">KIRIM</button>
+      <button id="tkk" onclick="myBtnTamKalKur()">KIRIM</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id='modee'>
+    <select id='slct'>
+      <option>easy</option>
+      <option>medium</option>
+      <option>hard</option>
+      <option>Mode dua angka</option>
+    </select>
+    <div><br><br>
+      <button onclick='btnModee()'>lanjut</button>
+    </div>
+  </div>
+  <h2 id='yourSkor'>Masukan <span style='color:blue;background-color:yellow'>.cekskor</span> ke kolom masukan nama untuk melihat skor tertinggimu lalu tekan lanjut dan masukan <span style='color:blue;background-color:yellow'>.aturwaktu</span> untuk mengatur waktu per soal sesuai keingginan dan <span style='color:blue;background-color:yellow'>.kembali</span> untuk keluar dari menu cek skor dan masukan <span style='color:blue;background-color:yellow'>.hapus</span> untuk menghapus skor kalian yang telah dicatat dan ketika quiz berjalan anda dapat memasukan di kolom masukan jawaban kode <span style='color:blue;background-color:yellow'>.runsee </span> untuk melihat soal beserta jawabanya  akan tetapi anda tidak akan mendapatkan nilai dan masukan  <span style='color:blue;background-color:yellow'>.soalagama </span> untuk mengerjakan soal tentang agama islam dan masukan  <span style='color:blue;background-color:yellow'>.soalinggris </span> untuk mengerjakan soal tentang bahasa inggris  </h2>
+  <div id='timee'>
+    <label>Nama</label>
+    <input placeholder="Masukan Nama"id='inpt2'><br><br><br>
+    <select id='tim'>
+      <option>30 detik per soal</option>
+      <option>60 detik per soal</option>
+      <option>tidak menggunakan waktu</option>
+    </select>
+    <div><br><br>
+      <button onclick='btnTimee()'>lanjut</button>
+    </div>
+  </div>
+  <div id='commandLine'>
+    <div>
+      <input id='inpt3'>
+    </div>
+    <div>
+      <button onclick="comLine()">send</button>
+    </div>
+  </div>
+  <h1 id='endPlay'>GAME OVER</h1>
+  <script>
+    
+    wrapper.style.display='none'
+    disSoal.style.display='none'
+    modee.style.display='none'
+    endPlay.style.display='none'
+    commandLine.style.display='none'
+    rahasia.style.display='none'
+    let soal={
+      angka:[1,2,3,4,5,6,7,8,9],
+      operator:["+","×","-"]
+    }
+    let nama;
+    let targett;
+    let nama2;
+    let setYourTime;
+    let runSetTime=true
+    function kodeMenuUtama(){
+       nama=`<span style='background-color:lime;color:black'>${inpt2.value}</span>`
+      if(inpt2.value==".cekskor"){
+        yourSkor.innerHTML=`<span style='color:blue;background-color:yellow'>$@Lucky_wahyu🔊 </span>Selamat datang di menu Cek Skor untuk keluar dari menu ini masukan <span style='color:blue'>.kembali</span> `
+        setTimeout(()=>{
+        yourSkor.innerHTML=JSON.parse(localStorage.getItem('simQuiz'))
+        },1000)
+        runBtn=false
+        yourSkor.style.display=""
+      }
+      if(inpt2.value==".kembali"){
+         add=0
+         yourSkor.style.display="none"
+         runBtn=true
+         inpt2.value=''
+         btnTime()
+      }
+      if(inpt2.value==".hapus"){
+         localStorage.removeItem('simQuiz')
+         window.location.reload()
+      }
+      if(inpt2.value==".runsee"){
+         yourSkor.innerHTML=`<span style='color:red;background-color:yellow'>£ucky_Wahýu 🔊 </span> "hmm......! masukan perintah ini di kolom masukan jawaban, bukan di kolom masukan nama. silahkan mainkan quiznya untuk masuk ke kolom masukan jawaban`
+          btnTime()
+      }
+      if(inpt2.value==".aturwaktu"){
+         runSetTime=false
+         setYourTime=`<span style='color:red'>yang kamu atur sendiri</span>`
+         targett=parseInt(prompt('masukan waktu per soal sesuai keinginan'))
+         nama2=prompt('masukan nama')
+         if(inpt2.value=='.settime')
+            inpt2.value='upsss'
+            setTimer3=true
+         waktu.innerHTML=`${targett} detik per soal`
+      }
+      if(inpt2.value==".info"){
+         yourSkor.innerHTML=`Ada 4 karakter nama yang ada di APP WEB ini yaitu <span style='color:red;background-color:yellow'>@Lucky_wahyu</span> <span style='color:red;background-color:yellow'>@Adiva</span> <span style='color:red;background-color:yellow'>@Rima</span> <span style='color:red;background-color:yellow'>@Avila</span><br><br>Hello World.....! <br><br> the more we learn the more we understand...keep the spirit...<span style='color:blue'>Jangan Lupa Sholat</span><br><br> Pertemuan melahirkan persahabatan dan perpisahan memutuskan persahabatan<br><br>Ada suatu hari dimana orang yang sangat akrab akan kembali asing kembali!!!`
+        btnTime()
+      }
+      if(inpt2.value=='.soalagama'){
+         yourSkor.innerHTML='Kumpulan Soal Agama yang dibuat oleh Lucky_wahyu <br><br>1. <a href="https://forms.gle/oWyStaC2o9mXygjQA">Soal Agama tentang Tajwid</a> <br><br>2. <a href="https://forms.gle/pMPa5NwW4WYdkm7r6">Soal Agama tentang Tajwid dan wawasan islami</a> <br><br>3. <a href="https://forms.gle/SwyVRRmqGgifA2Tp6">Soal Agama tentang Sejarah Nabi Musa a.s</a><br><br>4. <a href="https://docs.google.com/forms/d/e/1FAIpQLSdbHyq3-wvaLyB_JvZfiYkcpdn_FKY8YyL0kSAqYvzdOhJ2XQ/viewform?usp=sf_link">Soal Agama tentang wawasan islami</a>'
+           btnTime()
+    }
+      if(inpt2.value=='.dataku'){
+         yourSkor.innerHTML='Tekan untuk melihat Informasi.. <br><br><=><a href="https://sites.google.com/view/data-mystudent/halaman-muka">Data Informasi</a><=> <br>'
+           btnTime()
+    }
+      if(inpt2.value=='.soalinggris'){
+         yourSkor.innerHTML='Kumpulan Soal Inggris yang dibuat oleh Lucky_wahyu <br><br>1. <a href="https://forms.gle/HSp7GJQNYX8BUt2t5">Soal Inggris tentang My your that this</a> <br><br>2. <a href="https://forms.gle/vd6UoYqAqkru3orb8">Soal Inggris mengartikan sesuatu</a> <br><br>3. <a href="https://forms.gle/GCBYWs1aUGiF1T8A7">Soal Inggris tentang Subject and object</a><br><br>4. <a href="https://forms.gle/HZPaxPC9aZFaRoiF7">Soal Inggris mengartikan versi 2</a> <br><br>5. <a href="https://forms.gle/TSv2QXBLMhabU5wJ6">Soal Inggris tentang kata sifat</a> <br><br>6. <a href="https://forms.gle/hyWtPnWyDKHryZur8">Soal Inggris mengartikan v3</a> <br>'
+            btnTime()
+    }
+      if(inpt2.value=='.rima.lwk.jr.lockthis.890.send'){
+         yourSkor.innerHTML=`Dari <span style='color:red;background-color:yellow'>ima(◍•ᴗ•◍)</span> Halo mas luki semangat ya kerjo ne semoga we sehat selalu maaf nek aku rame teros nek ngaji makasih we ngajar aku dengan baik dan <span style='color:lime'>jangan lupain aku</span> semoga kene  sok gk asing semangat guru ngajiku maaf nek aku pernah gk sopan satu lagi tetep baturi <span style='color:lime'>main ml</span> ya dan semangat main mlnya maaf ya aku ra iso bahasa Inggris makasih we wes ngajar aku dengan sabar makasih mas lucky karo mas tommy semoga kalian lancar nek kerjo da sehat selalu guru ngajiku sok mben nek kalian wes muleh ngajar ngaji neh to plis tapi semoga kene tetep kenal ya gk asing maaf aku pernah ngendi kue tapi we sabar semoga seng dadi istrimu seneg oleh suami koyok kue semoga bereng istrimu cantik maaf ya ter lalu panjang semoga we panjang umur dan sehat selalu we berapa tahun muleh semangat pokok e kerjo ne cepet sukses ya dan nek kerjo oleh duek wakih ben mbak juarti bangan semangat guru ngajiku makasih we ngajar aku sampek jus 17 makasih banget awal e aku IQRO 2 SAMPEK jus 17 makasih we jek ileng mas aku lageg pertama mbok ajar aku malu malu tapi nek wes suwi dadi gk malu ok <span style='color:yellow'>sampek iki ae ya sok tak lanjutno ne</span> makasih guru ngajiku bye bye 😊😊👍🏻👍🏻 semangat<br><br>Dimana ya...? <span style='color:aqua'>RIMA yang rajin sholat!!!</span><br><br> Semoga orang yang selalu tidur malam menjadi anak pintar dan sholehah dan menjadi penerus nabi Muhammad saw <br><br><span style='color:yellow'>Oh ya....!!! terima kasih juga ya..  say... i get a lot of experience from you:)</span> </span>`
+            btnTime()
+    }
+      if(inpt2.value=='.avila.getid.from.sandal'){
+         yourSkor.innerHTML=`Hello <span style='color:lime'>Avila</span> siapa ya....? kalau dimushola selalu naruh sandalku di tong sampahh!!! <br><br> aku doain orang yg naruh sandalku ditong sampah semoga <span style='color:aqua'>rajin sholat dan jadi anak sholehah!</span> dan menjadi penerus nabi Muhammad saw`
+            btnTime()
+    }
+      if(inpt2.value=='.adiva.getid.from.lucky_wahyu.mylove'){
+         yourSkor.innerHTML=`Hello <span style='color:lime'>Adiva</span> siapa ya....? di rumah suka marah2 ga jelas....terkadang hehee....tapi i love you forever  ....semoga jadi anak sholehah ya...anak saudara perempuan ku ....<span style='color:aqua'>jadi anak pinter....penerus nabi Muhammad saw</span>`
+            btnTime()
+    }
+      if(inpt2.value=='.hadas'){
+         yourSkor.innerHTML=` <span style='color:lime'>Cara Bersuci dalam Islam</span><br><br> jika hendak melaksanakan sholat maka wajib hukumnya bersih dari hadas kecil...caranya adalah kita wudhu.<br><br> sedangkan jika laki-laki mimpi basah dan wanita selesai haid maka wajib bersih dari hadas besar, caranya cukup mandi dan sebelum mandi membaca niat <span style='color:blue'>aku niat mandi junub untuk menghilangkan hadas besar karena Allah swt</span> pakai bahasa indoesia gpp`
+            btnTime()
+    }
+      if(inpt2.value=='.tajwid'){
+         yourSkor.innerHTML=` <span style='color:lime'>Ilmu Tajwid</span><br><br> 
+         
+Tajwīd secara harfiah bermakna melakukan sesuatu dengan elok dan indah atau bagus dan membaguskan. Dalam ilmu Qira’ah, tajwid berarti mengeluarkan huruf dari tempatnya dengan memberikan sifat-sifat yang dimilikinya. Jadi ilmu tajwid adalah suatu ilmu yang mempelajari bagaimana cara membunyikan atau mengucapkan huruf-huruf yang terdapat dalam kitab suci al-Qur’an.
+
+‪ Pengertian lain dari ilmu tajwid ialah menyampaikan dengan sebaik-baiknya dan sempurna dari tiap-tiap bacaan ayat al-Qur’an. Para ulama menyatakan bahwa hukum bagi mempelajari tajwid itu adalah fardhu kifayah tetapi mengamalkan tajwid ketika membaca al-Qur’an adalah fardhu ain atau wajib kepada lelaki dan perempuan yang mukallaf atau dewasa.
+
+‪ Al-Qur’an adalah sebuah kitab suci yang mempunyai kode etika dalam membacanya. Membaca Al-Qur’an tidak seperti membaca bacaan-bacaan lainnya. Membaca Al-Qur’an harus tanpa nafas dalam pengertian sang pembaca harus membaca dengan sekali nafas hingga kalimat-kalimat tertentu atau hingga tanda-tanda tertentu yang dalam istilah ilmu tajwid dinamakan waqof. Jika si pembaca berhenti pada tempat yang tidak semestinya maka dia harus membaca ulang kata atau kalimat sebelumnya.
+
+‪ b. Hukum Bacaan Nun Mati/ Tanwin
+Nun mati/tanwin keduanya memiliki kesamaan akhir suara baca , yakni suara "EN oleh sebab itulah keduanya memiliki hukum yang sama manakala bertemu dengan huruf Hijaiyah. Nun mati/ tanwin bila bertemu dengan huruf hijaiyah akan menghasilkan bunyi yang berbeda-beda.
+
+‪ c. Idhar
+Idzhar : Maknanya adalah jelas, yang dimaksud jelas ialah jelas suara Nun Mati atau Tanwinnya, atau lebih jelas lagi suara EN nya , dan hurufnya ada 6.
+
+‪ Keterangan :
+Nun mati bertemu dengan Ha' dan Tanwin bertemu dengan "Aen, adapun dari segi lama membacanya atau harkat (ketukan) adalah Qashar atau pendek yang artinya begitu terbaca harus segera pindah, karena bacaan yang lama di suatu kalimat menimbulkan harkat menjadi panjang, yakni bisa menjadi dua bahkan sampai lima harkat..bagi yang baru belajar hal ini dapat dihindari dengan membaca secara putus putus. Sebagai tambahan, terjadinya pertemuan antara Tanwin atau Nun mati bukan dalam satu kalimat, tapi dengan kalimat setelahnya.
+
+‪ d. Ikhfa
+Ikhfa adalah yang terbanyak hurufnya yakni 15 huruf.
+Makna Ikhfa adalah samar samar, yakni menyembunyikan suara Nun mati atau Tanwin atau EN , secara dengung atau lebih tepatnya seperti bindeng. Tanwin dengan FA, dan Nundengan Kaf. Adapun panjang bacaanya adalah dua harkat atau dua ketukan nada, dalam istilah lain membacanya di tahan itulah yang lebih tepat karena bila dikatakan memanjangkan bacaan maka nati akan bentrok dengan penjelasan pelajaran tentang MAD.
+
+‪ e. Idgham
+Idgham terbagi dua macam cara membaca, yakni Idgham bila Ghunnah (tidak berdengung) dan Idgham bi Ghunnah (berdengung) Idgham artinya melebur, yakni melebur suara Nun mati atau Tanwin menjadi suara huruf setelahnya. Contohnya bila Nun mati atau Tanwin bertemu dengan salah satu huruf Idgham maka penjelasannya seperti di bawah ini:
+
+bila bertemu LAM, maka suara Nun mati atau Tanwin menjadi suara "EL atau suaraLAM.
+bila bertemu RA,maka suara Nun mati atau Tanwin menjadi suara ER atau suara RA.
+bila bertemu YA, maka suara Nun mati atau Tanwin menjadi suara Y atau YA.
+bila bertemu NUN, maka suaranya tetap /tidak berubah karena sama.
+bila bertemu MIM, maka suara Nun mati atau Tanwin menjadi suara EM atau MIM.
+bila bertemu WAWU, maka suara Nun mati atau Tanwin menjadi suara W atauWAWU
+f. Iqlab
+Iqlab hanya memili satu huruf yakni BA, Iqlab aritinya membalik , yakni membalik suara Tanwin atau Nun mati menjadi suara B atau BA, adapun bacaannya di tahan sebanyak dua harkat atau satu alif.
+g. Hukum Bacaan Mim Mati ﻡْ‎
+Hukum mim mati, yang disebut hukum mim mati jika huruf mim mati( ﻡْ)‎ bertemu dengan huruf-huruf hijaiyah. Hukum mim mati memiliki 3 jenis, yang diantaranya adalah :
+1. Ikhfa Syafaw
+Apabilah mim mati bertemu huruf ba’(‎ب‎). maka cara membacanya harus dibunyikan samar-samar di bibir dan dibaca didengungkan.<|B|R|> Contoh: ‎.(ﺗَﺮْﻣِﻴﻬِﻢﺑِﺤِﺠَﺎﺭَﺓٍ)‏‎
+
+2. Idgham Mimi
+Apabila mim mati (ﻡْ ) bertemu dengan mim(‎م‎), maka cara membacanya adalah seperti menyuarakan mim rangkap atau ditasyidkan dan wajib dibaca dengung. Idgham mimi disebut juga idgham mislain atau mutamasilain. Contoh :‎ ﺃَﻡ ﻣَﻦْ)ٍ)
+
+3. Izhar Syafawi ‎
+Apabila mim mati ﻡْ bertemu dengan salah satu huruf hijaiyyah selain huruf mim(‎م‏‎) dan ba’(‎ب‏‎),maka cara membacanya dengan jelas di bibir dan mulut tertutup.
+Contoh: ‎ ( ﻟَﻌَﻠَّﻜُﻢْ ﺗَﺘَّﻘُﻮﻥَ)
+
+h. Bacaan Alif Lam Qamarriyah dan Syamsiyah Bacaan alif lam (ال) adalah ketentuan membaca alif lam mati yang diikuti salah satu huruf hijaiyah.
+
+i. Alif lam syamsiyah
+Alif lam syamsiyah adalah hukum bacaan alif lam (ال) yang apabila bertemu salah satu huruf syamsiyah. Hukum bacaannya disebut Idgham syamsiyah atau termasuk huruf lam syamsiyah. Cara membacanya harus dimasukan atau diidghamkan atau Alif Lam hilang (samar) kepada huruf syamsiyah atau dengan kata lain tulisannya tetap ada tetapi tidak dibaca alif lamnya.
+Huruf-huruf syamsiyah ada 14, yaitu :
+ت ث د ذ ر ز س ش ص ض ط ظ ل ن
+
+`
+            btnTime()
+    }
+      if(inpt2.value=='.iftitah'){
+         yourSkor.innerHTML=` <span style='color:lime'>Doa Iftitah</span><br><br>
+        الله أَكْبَرُ كَبِيرًا، وَالْحَمْدُ لِلَّهِ كَثِيرًا، وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلًا
+إِنِّي وَجَّهْتُ وَجْهِيَ لِلَّذِيْ فَطَرَ السَّمَوَاتِ وَالأَرْضَ حَنِيْفًا مُسْلِمًا وَمَا أَنَا مِنَ المُشْرِكِيْن . إِنَّ صَلاَتِي وَنُسُكِيْ وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ العَالَمِيْن لاَ شَرِيْكَ لَهُ وَبِذَلِكَ أُمِرْتُ وَأَنَا مِنَ المُسْلِمِيًن`
+            btnTime()
+    }
+      if(inpt2.value=='.dudukdiantaraduasujud'){
+         yourSkor.innerHTML=` <span style='color:lime'>Duduk diantara dua sujud</span><br><br> 
+رَبِّ اغْفِرْلِيْ وَارْحَمْنِيْ وَاجْبُرْنِيْ وَارْفَعْنِيْ وَارْزُقْنِيْ وَاهْدِنِيْ وَعَافِنِيْ وَاعْفُ عَنِّيْ`
+            btnTime()
+    }
+      if(inpt2.value=='.tahyat'){
+         yourSkor.innerHTML=` <span style='color:lime'>Tahyatul akir</span> <br><br>
+التَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ ِللهِ ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكاَتُهُ السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِيْنَ . أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ الله وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ الله. اللَّهُمَّ صَلِّ عَلَى مُحَمَّد وعلى آلِ مُحَمَّد كَمَا صَلَّبْتَ عَلَى إِبْرَاهِيْمَ وَعَلَى آلِ إِبْرَاهِيْمَ وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيْمَ وَعَلَى آلِ إِبْرَاهِيْمَ فِيْ الْعَالَمِيْنَ إِنَّكَ حَمِيْدٌ مَجِيْد. اَلْلَّهُمَّ إِنِّيْ أَعُوْذُبِكَ مِنْ عَذَابِ جَهَنَّمَ وَمِنْ عَذَابِ القَبْرِ وَمِنْ فِتْنَةِ المَحْيَا وَالمَمَاتِ وَمِنْ شَرِّ فِتْنَةِ المَسِيْحِ الدَجَّالِ`
+            btnTime()
+    }
+      if(inpt2.value=='.doasetelahadan'){
+         yourSkor.innerHTML=` <span style='color:lime'>Doa setalah adzhan<br><br></span>
+اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامّةِ وَالصَّلاَةِ الْقَائِمَةِ آتِ مُحَمَّدَا ن الْوَسِيْلَةَ وَالْفَضِيْلَةَ وَالشَّرَفَ وَالدَّ رَجَةَ العَالِيَةَالرَّفِيعَةَ وَابْعَثْهُ مَقَامًا مَّحْمُوْدَانِ الَّذِيْ وَعَدْتَهُ إِنَّكَ لاَتُخْلِفُ الْمِيْعَادِ `
+            btnTime()
+    }
+    }
+    let runTime=true
+    let setTimer1=false
+    let setTimer2=false
+    let setTimer3=false
+    let runBtn=true
+    let timeText;
+    let add=0
+    function btnTimee(){
+      kodeMenuUtama()
+      add++
+      if(runBtn&&tim.value=='30 detik per soal'){
+        timeText=`<span style='color:red'>30 detik</span>`
+        if(runSetTime)
+           setTimer1=true
+           timee.style.display='none'
+           yourSkor.style.display='none'
+           modee.style.display=''
+        if(runSetTime)
+           waktu.innerHTML='30 detik per soal'
+      }
+      if(runBtn&&tim.value=='60 detik per soal'){
+         timeText=`<span style='color:red'>60 detik</span>`
+        if(runSetTime)
+           setTimer2=true
+           timee.style.display='none'
+           yourSkor.style.display='none'
+           modee.style.display=''
+        if(runSetTime)
+           waktu.innerHTML='60 detik per soal'
+      }
+      if(runBtn&&tim.value=='tidak menggunakan waktu'){
+         timeText=`<span style='color:red'>tidak ada</span>`
+        if(runSetTime)
+           runTime=false
+           timee.style.display='none'
+           yourSkor.style.display='none'
+           modee.style.display=''
+        if(runSetTime)
+           waktu.innerHTML='Tidak ada waktu'
+      }
+      inpt2.value=''
+      if(add>=3)
+         yourSkor.innerHTML=`<span style='color:red;background-color:yellow'>Lucky_wahyu 🔊 </span>Masukan <span style='color:blue'>.kembali</span> ke kolom masukan nama terlebih dahulu lalu tekan tombol lanjut warna hijau atau jika kamu binggung muat ulang halaman web!!!`
+    }
+    let setEasy=false
+    let setMedium=false
+    let setHard=false
+    let modeText;
+    function btnModee(){
+      if(slct.value=='easy'){
+         modeText=`<span style='color:blue'>Easy</span>`
+         setEasy=true
+         wrapper.style.display=''
+         disSoal.style.display=''
+         modee.style.display='none'
+         medium.style.display='none'
+         hard.style.display='none'
+         tkk.style.display='none'
+      }
+      if(slct.value=='medium'){
+         modeText=`<span style='color:blue'>Medium</span>`
+         setMedium=true
+         wrapper.style.display=''
+         disSoal.style.display=''
+         modee.style.display='none'
+         easy.style.display='none'
+         hard.style.display='none'
+         tkk.style.display='none'
+      }
+      if(slct.value=='hard'){
+         modeText=`<span style='color:blue'>Hard</span>`
+         setHard=true
+         wrapper.style.display=''
+         disSoal.style.display=''
+         modee.style.display='none'
+         easy.style.display='none'
+         medium.style.display='none'
+         tkk.style.display='none'
+      }
+      if(slct.value=='Mode dua angka'){
+         modeText=`<span style='color:blue'>Mode dua angka</span>`
+         wrapper.style.display=''
+         disSoal.style.display=''
+         modee.style.display='none'
+         easy.style.display='none'
+         medium.style.display='none'
+         hard.style.display='none'
+         tkk.style.display=''
+         setJenisSoal=false
+         setJenisSoal2=true
+         dafSoal.innerHTML=`<span style='background-color:yellow; border:3px solid black;color:black'>Semangat ${nama}`
+         rahasia.style.display=''
+         rahasia.innerHTML=`<span style='color:red'>.@Lucky_jr 🔊 </span> Upsss...sorry yah. dalam mode ini daftar soal yg dikerjakan tidak ditampilkan. karena banyaknya fungsi yang diatur oleh boolean pada fungsi runQuiz()...takutnya ada kesalahan fatal:!`
+         setTimeout(()=>{ rahasia.style.display='none'},15000)
+      }
+    }
+    let lanjut=0
+    let lanjut2=0
+    function myBtnEasy(){
+      runningQuiz('easy',1,2,3,4,5,6,7,8,9)
+    }
+    function myBtnMedium(){
+      runningQuiz('medium',4,12,5,14,7,16,7,18,9)
+    }
+    function myBtnHard(){
+      runningQuiz('hard',21,32,43,9,58,26,77,8,29)
+    }
+    function myBtnTamKalKur(){
+      runningQuiz('modeDuaAngka',1,2,3,4,5,6,7,8,9)
+    }
+    function runningQuiz(lock,j,k,l,m,n,o,p,q,r){
+      callJSON()
+      lanjut2++
+      if(runSee)
+         cutArray()
+      if(keyStop&&setJenisSoal)
+         cutArray()
+      if(setJenisSoal2)
+         cutArray2()
+      if(runSee)
+         for(i=0;i<3;i++){
+             jawabanBenar.pop()
+          }
+      if(keyStop&&setJenisSoal)
+         cekJawaban()
+      if(setJenisSoal2)
+         cekJawaban2()
+      if(runPushSoalForGameEnd)
+         pushSoal()
+      if(keyStop&&setJenisSoal)
+         pushSoal()
+      modeBerubah(lock,j,k,l,m,n,o,p,q,r)
+      lanjut++
+         textLanjut()
+      if(lockThis)
+         addSoalBeruntun()
+      menghitung()
+      if(runSee)
+         pushSoal()
+      if(lockThis)
+         inpt.value=""
+      datMasuk=[]
+      datMasuk2=[]
+    }
+    let fullSoal=[]
+    let ranOp=[]
+    let ranNum=[]
+    let ranNum2=[]
+    let ranNum3=[]
+    let ranNum4=[]
+    function addSoalBeruntun(){
+      ranOp.push(Math.floor(Math.random()*3)+0)
+      ranNum.push(Math.floor(Math.random()*9)+0)
+      ranNum2.push(Math.floor(Math.random()*9)+0)
+      ranNum3.push(Math.floor(Math.random()*9)+0)
+      ranNum4.push(Math.floor(Math.random()*9)+0)
+      let newSoal=[]
+      let newSoal2=[]
+      let newSoal3=[]
+      let newSoal4=[]
+      newSoal.push(soal.angka[ranNum[lanjut-1]])
+      newSoal2.push(soal.angka[ranNum2[lanjut-1]])
+      newSoal3.push(soal.angka[ranNum3[lanjut-1]])
+      newSoal4.push(soal.angka[ranNum4[lanjut-1]])
+      let op=soal.operator[ranOp[lanjut-1]]
+      if(setJenisSoal){
+      mySoal.innerHTML=`${newSoal} ${op} ${newSoal2} ${op} ${newSoal3}=`
+      fullSoal.push(...newSoal,...newSoal2,...newSoal3)}
+      if(setJenisSoal2){
+      mySoal.innerHTML=`${newSoal} + ${newSoal2} =`
+      fullSoal.push(...newSoal,...newSoal2)}
+      
+    }
+    function cutArray(){
+      if(fullSoal.length>=3)
+         for(i=0;i<5;i++){
+           fullSoal.pop()
+         }
+    }
+    function cutArray2(){
+      if(fullSoal.length>=2)
+         for(i=0;i<5;i++){
+           fullSoal.pop()
+         }
+    }
+    let setJenisSoal=true
+    let setJenisSoal2=false
+    let jawabanBenar=[]
+    function menghitung(){
+      if(setJenisSoal){
+         pertambahan=String(fullSoal.reduce((a,b)=>a+b))
+         perkalian=String(fullSoal.reduce((a,b)=>a*b))
+         pengurangan=String(fullSoal.reduce((a,b)=>a-b))
+         jawabanBenar.push(pertambahan,perkalian,pengurangan)}
+      if(setJenisSoal2){
+         duaAngka=String(fullSoal.reduce((a,b)=>a+b))
+         jawabanBenar.push(duaAngka)
+      }
+    }
+    function cheat(oper,a, b,c,d){
+      switch(oper){
+        case 'kali':
+          return a*b*c
+            break
+        case 'kali2':
+          return a*b
+            break
+        case 'tambah':
+          return a+b+c
+            break
+        case 'tambah2':
+          return a+b
+            break
+        case 'kurang':
+          return a-b-c
+            break
+        case 'kurang2':
+          return a-b
+            break
+        case 'kaltam':
+          return a*b+c
+            break
+        case 'kalkur':
+          return a*b-c
+            break
+        case 'kaltamkur':
+          return a*b+c-d
+            break
+      }
+    }
+    function textLanjut(){
+      if(lanjut==10||lanjut==25||lanjut==40){
+          rahasia.style.display=''
+          rahasia.innerHTML=`<span style='color:red'>@Adiva 🔊 </span>Hello...Semangat mengerjakan soalnya!`
+          setTimeout(()=>{
+            rahasia.style.display='none'
+          },3000)
+      }
+      if(lanjut==15||lanjut==30||lanjut==45){
+          rahasia.style.display=''
+          rahasia.innerHTML=`<span style='color:red'>@Rima 🔊 </span>Hello...Semangat mengerjakan soalnya!`
+          setTimeout(()=>{
+            rahasia.style.display='none'
+          },3000)
+      }
+      if(lanjut==20||lanjut==35||lanjut==50){
+          rahasia.style.display=''
+          rahasia.innerHTML=`<span style='color:red'>@Avila 🔊 </span>Hello...Semangat mengerjakan soalnya!`
+          setTimeout(()=>{
+            rahasia.style.display='none'
+          },3000)
+      }
+    }
+    let point=0
+    function cekJawaban(){
+      if(inpt.value==jawabanBenar[ranOp[lanjut-1]]){
+        if(setEasy)
+           evaluasiNilai('myPoint',10,50,20)
+        if(setMedium)
+           evaluasiNilai('myPoint',20,60,30)
+        if(setHard)
+           evaluasiNilai('myPoint',30,70,40)
+        if(setTimer1)
+           evaluasiNilai('myTimer',30)
+        if(setTimer2)
+           evaluasiNilai('myTimer',60)
+        if(setTimer3)
+           evaluasiNilai('myTimer',targett)
+        nilai.innerHTML=`nilai : ${point}`
+        datMasuk3=true
+      }else{
+        datMasuk3=false
+      }
+      for(i=0;i<3;i++){
+        jawabanBenar.pop()
+      }
+    }
+    function cekJawaban2(){
+      if(inpt.value==jawabanBenar){
+           evaluasiNilai('myPoint',10)
+        if(setTimer1)
+           evaluasiNilai('myTimer',30)
+        if(setTimer2)
+           evaluasiNilai('myTimer',60)
+        if(setTimer3)
+           evaluasiNilai('myTimer',targett)
+        prinSoal.innerHTML=`jawaban mu <span style='color:blue'>benar </span>yaitu : ${jawabanBenar}`
+        nilai.innerHTML=`nilai : ${point}`
+        datMasuk3=true
+      }else{
+        prinSoal.innerHTML=`jawaban mu <span style='color:red'>salah  </span>yang benar yaitu : ${jawabanBenar}`
+        datMasuk3=false
+      }
+      jawabanBenar.pop()
+    }
+    let timer;
+    function time(s){
+      timer=setInterval(()=>{
+        (s>0)? s--:gameOver()
+        waktu.innerHTML=`Timer : ${s}`
+      },1000)
+    }
+    function evaluasiNilai(choice,tambah,kali,kurang){
+      switch(choice){
+        case 'myTimer':
+          switch(inpt.value){
+            case jawabanBenar[0]:
+              clearInterval(timer)
+              if(runTime)
+              time(tambah)
+              break
+            case jawabanBenar[1]:
+              clearInterval(timer)
+              if(runTime)
+              time(tambah)
+              break
+            case jawabanBenar[2]:
+              clearInterval(timer)
+              if(runTime)
+              time(tambah)
+              break
+          }
+          break
+        case 'myPoint':
+          switch(inpt.value){
+            case jawabanBenar[0]:
+              point+=tambah
+              break
+            case jawabanBenar[1]:
+              point+=kali
+              break
+            case jawabanBenar[2]:
+              point+=kurang
+              break
+          }
+          break
+      }
+    }
+    function modeBerubah(target,a,b,c,d,e,f,g,h,i){
+      switch(target){
+        case 'easy':
+          if(point>=90)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a+6)
+          if(point>=160)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a+8)
+          if(point>=200)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a+11)
+          if(point>=250)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a+23)
+          break
+        case 'medium':
+          if(point>=0)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a)
+          if(point>=100)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*2)
+          if(point>=150)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*3)
+          if(point>=200)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*4)
+          break
+        case 'hard':
+          if(point>=0)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a)
+          if(point>=100)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*2)
+          if(point>=140)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*4)
+          break
+        case 'modeDuaAngka':
+          if(point>=0)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a)
+          if(point>=30)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a+7)
+          if(point>=60)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*4)
+          if(point>=90)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*7)
+          if(point>=120)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*9)
+          if(point>=200)
+             soal.angka=[a,b,c,d,e,f,g,h,i].map(a=>a*17)
+          break
+      }
+    }
+    let datMasuk=[]
+    let datMasuk2=[]
+    let datMasuk3=false
+    let tamp=['','','','']
+    function mesinCetak(actvy,a,b,c,d,e){
+      switch(actvy){
+        case 'soal':
+          datMasuk.push(a,b,c,d,e)
+          break
+        case 'json':
+          if(!localStorage.getItem('simQuiz'))
+          localStorage.setItem('simQuiz','[]')
+          myDatBas=JSON.parse(localStorage.getItem('simQuiz'))
+          myDatBas.push(`${a} nilai kamu ${b} dalam tingkat kesulitan ${c} dan waktu per soal ${d}<br>`)
+          localStorage.setItem('simQuiz',JSON.stringify(myDatBas))
+          yourSkor.innerHTML=JSON.parse(localStorage.getItem('simQuiz'))
+          break
+      }
+      switch(datMasuk3){
+        case true:
+          datMasuk3="<span style='color:blue'>jawaban benar</span>"
+          break
+        case false:
+          datMasuk3="<span style='color:red'>jawaban salah</span>"
+          break
+      }
+      if(lanjut>=1&&keyStop)
+      tamp.push(`${datMasuk.join(' ')} = <span style='background-color:black;color:white'>${inpt.value}</span> ${datMasuk3}<br>`)
+      if(lanjut>=1&&runSee){
+        if(tamp.length<1||lanjut==10||lanjut==30||lanjut==50)
+        tamp.push(`<span style='color:red'>Lucky_wahyu 🔊 </span>hello anda dalam mode melihat soal dan jawabanya. Masukan <span style='color:blue'>.kembali</span> ke kolom masukan jawaban untuk kembali mengerjakan soal dan mendapat nilai`)
+      tamp.push(`${datMasuk.join(' ')} = <span style='background-color:black;color:white'>${jawabanBenar[ranOp[lanjut-1]]}</span><br>`)}
+      if(tamp.length>4)
+      tamp.shift()
+      prinSoal.innerHTML=tamp.join(' ')
+    }
+    let keyStop=true
+    let runSee=false
+    function callJSON(){
+      if(inpt.value==".simpan"){
+         keyStop=false
+        tamp.push("simpan")
+        mesinCetak('json',nama,`<span style='color:orange'>${point}</span>`,modeText,timeText)
+        window.location.reload()
+      }
+      if(inpt.value==".atur.simpan"){
+         keyStop=false
+        tamp.push("simpan")
+        mesinCetak('json',nama2,`<span style='color:orange'>${point}</span>`,modeText,setYourTime)
+        window.location.reload()
+      }
+      if(inpt.value==".runsee"&&modeText!==`<span style='color:blue'>Mode dua angka</span>`){
+        lanjut=0
+         tamp=[]
+         keyStop=false
+         setJenisSoal2=false
+         runSee=true
+         runMesinCetak=false
+         runMesinCetak2=true
+      }
+      if(inpt.value=='.callthis'){
+        commandLine.style.display=""
+     }
+      if(inpt.value==".info"){
+        tamp=[`<span style='font-size:14px'>game ini dibuat oleh <span style='color:red'>Lucky Wahyu_K</span> hubungi email <span style='color:blue'>luckywahyu050@gmail.com</span> jika ada kesalahan<br>`]
+      }
+      if(tim.value=="tidak menggunakan waktu"){
+        if(lanjut==0||lanjut==20||lanjut==50)
+        tamp=[`<span style='color:red'>Lucky_wahyu 🔊 </span> Hallo ${nama}, kamu mengerjakan tanpa menggunakan waktu untuk menyimpan skor mu masukan <span style='color:blue'>.simpan</span> pada kolom masukan jawaban lalu tekan tombol kirim, JANGAN LIHAT KALKULATOR Ya....`]
+        if(lanjut==1||lanjut==21||lanjut==51)
+        tamp=[]
+      }
+      if(inpt.value==".kembali"){
+         tamp=["<span style='color:red'>Lucky_wahyu 🔊 </span>Silahkan kerjakan soal, JANGAN LIHAT KALKULATOR Ya...."]
+         keyStop=true
+         setJenisSoal2=true
+         runSee=false
+         runMesinCetak=true
+         runMesinCetak2=false
+         lanjut=0
+         lanjut2=0
+      }
+      if(inpt.value=='.runsee'&&modeText==`<span style='color:blue'>Mode dua angka</span>`){
+        rahasia.style.display=''
+        rahasia.innerHTML="<span style='color:red'>Lucky_wahyu 🔊 </span>Mohon Maaf... anda tidak bisa menggunakan mode <span style='color:blue'>.runsee</span> di mode dua angka"
+      }
+    }
+    function comLine(){
+      if(inpt3.value==".kalkulator"){
+         rahasia.style.display=''
+         let namCheat=prompt('Masukan operator')
+         let a=parseInt(prompt('masukan angka'))
+         let b=parseInt(prompt('masukan angka'))
+         let c=parseInt(prompt('masukan angka jika perlu'))
+         let d=parseInt(prompt('masukan angka jika perlu'))
+         rahasia.innerHTML=`Hasilnya adalah = ${cheat(namCheat,a,b,c,d)}`
+       }
+      if(inpt3.value==".exit"){
+         rahasia.innerHTML="<span style='color:blue'>Lucky_wahyu🔊 </span>Ups....anda telah keluar dari mode kalkulator sederhana...!"
+         setTimeout(()=>{
+            rahasia.style.display='none'
+        },5000)
+         commandLine.style.display='none'
+    }
+    }
+    let runMesinCetak=true
+    let runMesinCetak2=false
+    function pushSoal(){
+      if(runMesinCetak)
+         mesinCetak('soal',soal.angka[ranNum[lanjut2-2]],soal.operator[ranOp[lanjut2-2]], soal.angka[ranNum2[lanjut2-2]],soal.operator[ranOp[lanjut2-2]], soal.angka[ranNum3[lanjut2-2]])
+      if(runMesinCetak2)
+         mesinCetak('soal',soal.angka[ranNum[lanjut-1]],soal.operator[ranOp[lanjut-1]], soal.angka[ranNum2[lanjut-1]],soal.operator[ranOp[lanjut-1]], soal.angka[ranNum3[lanjut-1]])
+    }
+    let lockThis=true
+    let runPushSoalForGameEnd=false
+    function gameOver(){
+      runPushSoalForGameEnd=true
+      keyStop=false
+      myBtnEasy()
+      if(tamp.length>1){
+         tamp.pop()
+         lockThis=false}
+      if(tim.value=='30 detik per soal'&&setYourTime==undefined||tim.value=='60 detik per soal'&&setYourTime==undefined||tim.value=='tidak menggunakan waktu'&&setYourTime==undefined)
+      tamp.push(`Silahkan simpan dengan cara ketik <span style='color:blue'>.simpan</span> pada kolom Masukan jawaban   `)
+      if(setYourTime==`<span style='color:red'>yang kamu atur sendiri</span>`)
+      tamp.push(`<span style='color:red'>@Lucky_wahyu 🔊 </span>Hello kamu mengatur waktumu sendiri. Silahkan simpan dengan cara ketik <span style='color:blue'>.atur.simpan</span> pada kolom Masukan jawaban `)
+      endPlay.style.display=""
+    }
+  </script>
+</body>
+</html>
